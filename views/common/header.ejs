@@ -1,0 +1,42 @@
+<ul class="header">
+  <li><a href='/'>HOME </a></li>
+  <li><a href='/addproduct'>PRODUCTS</a></li>
+  <li><a href='/cart'>CART</a></li>
+  <li><a href='/orders'>ORDERS</a></li>
+
+  <% if (user && user.name) { %>
+    <li id="profile_icon">
+
+      <a>
+        <%= user.name %>
+      </a>
+    </li>
+    <% } else { %>
+      <li><a href='/login'>LOGIN</a></li>
+      <% } %>
+</ul>
+
+
+<div class="card " id="profile">
+  <div class="card photo rounded-circle mx-auto mt-2" style="height:100px;width: 100px;"></div>
+  <h2 class="name text-center"><%= user.name %></h2>
+  <button class="bg-primary mx-5" onclick=logout(); style="height:2rem;color: white;">logout</button>
+
+</div>
+
+
+<script>
+  const profile_icon = document.querySelector('#profile_icon')
+  const profile = document.querySelector('#profile')
+  function logout() {
+    cookieStore.delete('_id');
+    console.log("logged out");
+  }
+  
+  profile_icon.addEventListener('click', () => {
+    if(profile.classList.contains('show_profile'))
+    profile.classList.remove("show_profile")
+    else
+    profile.classList.add('show_profile');
+  })
+</script>

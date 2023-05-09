@@ -1,0 +1,30 @@
+*{
+    margin: 0;
+    padding:0;
+}
+
+.c_image {
+    height: 170px;
+    width: 170px;
+    /* border: 2px solid black; */
+    /* border-radius: 20px; */
+    overflow: hidden;
+}
+
+.main_box{
+    display: flex;
+    align-items: center;
+    background-color: white;
+    max-width: 40rem;
+}
+
+body{
+    background: white;
+}
+
+.total{
+    max-height: 350px;
+    position: sticky;
+    top: 100px;
+    
+  }

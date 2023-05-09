@@ -1,0 +1,19 @@
+.alertbox {
+    position: fixed;
+    padding: 50px;
+    height: min-content;
+    width: 40vw;
+    background-color: rgb(5, 93, 255);
+    border-radius: 10px;
+    font-size: 30px;
+    font-weight: bolder;
+    color: rgb(0, 0, 0);
+    left: 0;
+    right: 0;
+    top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    bottom: auto;
+    text-align: center;
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link rel="stylesheet" href="/public/css/header.css">
+    <link rel="stylesheet" href="/public/css/cart.css">
+    <link rel="stylesheet" href="/public/css/sabjiwalla.css">
+    <link rel="stylesheet" href="/public/css/myalert.css">
+
+
+</head>
+
+<body>
+
+    <%- include('common/header.ejs') %>
+        <%- include('common/make_order.ejs') %>
+
+            <div class="products p-5">
+
+                <h1 class="text-center ">Your Cart</h1>
+                <% i=1;let total=0 ; %>
+                    <div class="container">
+                        <div class="row">
+                            <% if(cart.length !=0){ %>
+                                <div class="col-md-6">
+                                    <% cart.forEach(element=> { %>
+                                        <div class=" main_box fs-4 fw-bold border-secondary border rounded-5 px-5 ">
+                                            <div class="index">
+                                                <%= i++ %>
+                                            </div>
+                                            <div class="c_image m-4"><img src="<%= element.image_url %>"
+                                                    alt="Not Found">
+                                            </div>
+                                            <div>
+                                                <div class="name">
+                                                    <%= element.name %>
+                                                </div>
+                                                <div class="price">
+                                                    <%= element.price %>
+                                                        <% total +=Number(element.price) %>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <button id="remove_to_cart"
+                                                        onclick="remove_to_cart('<%= i-2 %>')">Remove</button>
+                                                    <button id="save_for_later"
+                                                        onclick="save_for_later('<%= i-2 %>')">Save
+                                                        For
+                                                        Later</button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% }) %>
+
+                                </div>
+                                <% } else { %>
+                                    <H1 class="text-center w-100 m-5 " style="font-size: 100px;color: crimson;">
+                                        The Cart is Empty</H1>
+                                    <% } %>
+                                        <% if (i>1) { %>
+                                            <div class="col-md-6 card total text-center">
+                                                <h1 class="mt-5">Price Details</h1>
+                                                <h2 class="my-5">total amount <%= total %>
+                                                </h2>
+
+                                                <button class="bg-primary align-self-center "
+                                                    style="min-width: 300px;min-height: 50px; color: white;">Place the
+                                                    Order</button>
+                                            </div>
+                                            <% } %>
+
+                        </div>
+                    </div>
+            </div>
+
+
+
+
+            <script src="/public/js/myalert.js"></script>
+            <script src="/public/js/remove_to_cart.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+                crossorigin="anonymous"></script>
+</body>
+
+</html>

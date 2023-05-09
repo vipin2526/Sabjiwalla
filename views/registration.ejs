@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta id="viewport" content="width=device-width, initial-scale=1.0">
+    <title>registration</title>
+    <link rel="stylesheet" href="/public/css/header.css">
+    <link rel="stylesheet" href="/public/css/login.css">
+</head>
+
+<body>
+    <%- include('common/header.ejs') %>
+    <div class="container">
+        <form class="box" action="/signup" method="post">
+            <h1>Signup</h1>
+            <input type="text" name="name" placeholder=" NAME" required value="">
+            <input type="number" name="phone_no" placeholder=" PHONE NO" required value="">
+            <input type="email" name="email" placeholder=" EMAIL ID" required value="">
+            <input type="text" name="password" placeholder=" PASSWORD" required value="">
+            <!-- <button onclick=signup()>register</button> -->
+            <button type="submit">register</button>
+            <div class="register-line">I have an account<a href="login"> Login</a></div>
+
+        </form>
+    </div>
+    <script src="/public/js/myalert.js"></script>
+</body>
+
+</html>

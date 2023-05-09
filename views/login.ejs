@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/public/css/header.css">
+    <link rel="stylesheet" href="/public/css/login.css">
+
+</head>
+
+<body> 
+
+    <%- include('common/header.ejs') %>
+       
+
+            <div class="container">
+                <form class="box" action="/login" method="post">
+                    <h1 style="margin-bottom: 3vh;">Login</h1>
+                    <input id="username" type="text" name="username" placeholder=" USER ID" required value="">
+                    <input id="password" type="password" name="password" placeholder=" PASSWORD" required value="">
+                    <div class="line">
+                        <lebel><input type="checkbox" name="remember" id="remember"> remember me</lebel>
+                        <a href="/forget_password" class="forget">forget password?</a>
+                    </div>
+                    <button type="submit">login</button>
+                    <div class="register-line"> Don't have an account?<a href="/registration"> Register</a></div>
+
+                </form>
+            </div>
+
+            <!-- <script src="/public/js/login.js"></script> -->
+            <script src="/public/js/myalert.js"></script>
+</body>
+
+</html>
