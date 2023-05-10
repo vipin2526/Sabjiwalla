@@ -23,7 +23,7 @@ async function signup() {
         }
 
 
-        resp = await fetch('http://localhost:5000/signup', req);
+        resp = await fetch('/signup', req);
         statuscode = resp.status;
         if (statuscode == 200) {
             message = await resp.json();

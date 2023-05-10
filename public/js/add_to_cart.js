@@ -17,7 +17,7 @@ async function add_to_cart(product_id, quantity = 1) {
         }),
     }
 
-    resp = await fetch('http://localhost:5000/cart', req);
+    resp = await fetch("/cart", req);
     statuscode = resp.status;
     if (statuscode == 200) {
         myalert("Added in Your Cart!")

@@ -10,7 +10,7 @@ async function remove_to_cart(i) {
         }),
     }
 
-    resp = await fetch('http://localhost:5000/remove', req);
+    resp = await fetch('/remove', req);
     statuscode = resp.status;
     if (statuscode == 200) {
         location.reload();
@@ -22,6 +22,6 @@ async function remove_to_cart(i) {
 }
 
 
-function save_for_later(i){
+function save_for_later(i) {
     remove_to_cart(i);
 }
