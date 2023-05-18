@@ -18,6 +18,7 @@ const islogin = async (req, res, next) => {
     else {
         req.param = 0;
         next();
+        // i will recheck this route
     }
 }
 
@@ -27,7 +28,6 @@ routes.get('/', islogin, async (req, res) => {
         const vegitables = await Product.find({ 'category': 'vegitable' });
         const fruits = await Product.find({ 'category': 'fruit' });
         // console.log(await Product.deleteOne({}));
-
         res.render('index', { vegitables, fruits, user });
     } catch (error) {
         console.log('Error : ', error);
@@ -47,6 +47,12 @@ routes.get('/addproduct', islogin, (req, res) => {
 routes.get('/orders', islogin, (req, res) => {
     res.render('orders', { user: req.param });
 })
+routes.get('/create_order', islogin, (req, res) => {
+    res.render('create_order', { user: req.param });
+})
+routes.get('/forget_password',(req,res)=>{
+    res.render('forget_password');
+})
 /// cart
 routes.get('/cart', islogin, async (req, res) => {
 
@@ -63,7 +69,6 @@ routes.get('/cart', islogin, async (req, res) => {
         res.render('cart', { user: req.param, cart });
     } catch (error) {
         console.log('Error : ', error);
-
     }
 })
 
@@ -87,7 +92,7 @@ routes.post('/signup', async (req, res) => {
         const user = new User(req.body);
         const usersave = await user.save();
         console.log(usersave);
-        res.send(usersave);
+        res.redirect('/login');
     } catch (error) {
         console.log(error);
     }
@@ -143,7 +148,23 @@ routes.post('/remove', async (req, res) => {
         console.log('Error : ', error);
     }
 })
-
+routes.post('/new_address', async (req, res) => {
+    try {
+        let address = req.body;
+        console.log(address);
+        const user = await User.findOne({ _id: req.cookies['_id'] })
+        if (user) {
+            user.address.unshift({ name: address.name, landmark: address.landmark, city: address.city, pincode: address.pincode, state: address.state, phone_no: address.phone_no });
+            const saveduser = await user.save();
+            // console.log("add to cart  ", saveduser);
+            res.send("Address Added");
+        }
+        else
+            res.send("User not found");
+    } catch (error) {
+        console.log('Error : ', error);
+    }
+})
 
 // add prodcut
 

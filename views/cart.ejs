@@ -19,68 +19,68 @@
 <body>
 
     <%- include('common/header.ejs') %>
-       <!-- <%- include('common/make_order.ejs') %>  this will be activate after fully developed-->
+        
 
-            <div class="products p-5">
+        <div class="products p-5">
 
-                <h1 class="text-center ">Your Cart</h1>
-                <% i=1;let total=0 ; %>
-                    <div class="container">
-                        <div class="row">
-                            <% if(cart.length !=0){ %>
-                                <div class="col-md-6">
-                                    <% cart.forEach(element=> { %>
-                                        <div class=" main_box fs-4 fw-bold border-secondary border rounded-5 px-5 ">
-                                            <div class="index">
-                                                <%= i++ %>
+            <h1 class="text-center ">Your Cart</h1>
+            <% i=1;let total=0 ; %>
+                <div class="container">
+                    <div class="row">
+                        <% if(cart.length !=0){ %>
+                            <div class="col-md-6">
+                                <% cart.forEach(element=> { %>
+                                    <div class=" main_box fs-4 fw-bold border-secondary border rounded-5 px-5 ">
+                                        <div class="index">
+                                            <%= i++ %>
+                                        </div>
+                                        <div class="c_image m-4"><img src="<%= element.image_url %>" alt="Not Found">
+                                        </div>
+                                        <div>
+                                            <div class="name">
+                                                <%= element.name %>
                                             </div>
-                                            <div class="c_image m-4"><img src="<%= element.image_url %>"
-                                                    alt="Not Found">
+                                            <div class="price">
+                                                <%= element.price %>
+                                                    <% total +=Number(element.price) %>
                                             </div>
-                                            <div>
-                                                <div class="name">
-                                                    <%= element.name %>
-                                                </div>
-                                                <div class="price">
-                                                    <%= element.price %>
-                                                        <% total +=Number(element.price) %>
-                                                </div>
-                                                <div class="d-flex">
-                                                    <button id="remove_to_cart"
-                                                        onclick="remove_to_cart('<%= i-2 %>')">Remove</button>
-                                                    <button id="save_for_later"
-                                                        onclick="save_for_later('<%= i-2 %>')">Save
-                                                        For
-                                                        Later</button>
+                                            <div class="d-flex">
+                                                <button id="remove_to_cart"
+                                                    onclick="remove_to_cart('<%= i-2 %>')">Remove</button>
+                                                <button id="save_for_later" onclick="save_for_later('<%= i-2 %>')">Save
+                                                    For
+                                                    Later</button>
 
-                                                </div>
                                             </div>
                                         </div>
-                                        <% }) %>
+                                    </div>
+                                    <% }) %>
 
-                                </div>
-                                <% } else { %>
-                                    <H1 class="text-center w-100 m-5 " style="font-size: 100px;color: crimson;">
-                                        The Cart is Empty</H1>
-                                    <% } %>
-                                        <% if (i>1) { %>
-                                            <div class="col-md-6 card total text-center">
-                                                <h1 class="mt-5">Price Details</h1>
-                                                <h2 class="my-5">total amount <%= total %>
-                                                </h2>
-
+                            </div>
+                            <% } else { %>
+                                <H1 class="text-center w-100 m-5 " style="font-size: 100px;color: crimson;">
+                                    The Cart is Empty</H1>
+                                <% } %>
+                                    <% if (i>1) { %>
+                                        <div class="col-md-6 card total text-center">
+                                            <h1 class="mt-5">Price Details</h1>
+                                            <h2 class="my-5">total amount <%= total %>
+                                            </h2>
+                                            <a href="/create_order">
                                                 <button class="bg-primary align-self-center "
                                                     style="min-width: 300px;min-height: 50px; color: white;">Place the
                                                     Order</button>
-                                            </div>
-                                            <% } %>
+                                            </a>
 
-                        </div>
+                                        </div>
+                                        <% } %>
+
                     </div>
-            </div>
+                </div>
+        </div>
 
 
-
+        <%- include('common/footer.ejs') %>
 
             <script src="/public/js/myalert.js"></script>
             <script src="/public/js/remove_to_cart.js"></script>

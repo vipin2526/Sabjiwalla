@@ -31,6 +31,7 @@
   function logout() {
     cookieStore.delete('_id');
     console.log("logged out");
+    location.reload();
   }
   
   profile_icon.addEventListener('click', () => {

@@ -1,0 +1,64 @@
+<form id="address_box">
+   <div class="container border border-primary rounded  detail_box" style="min-height: 500px;">
+      <div id="close" type="button" onclick="{document.querySelector('#address_box').style.display='none';}">&#128473
+      Close</div>
+
+      <div class="row  mt-5 fs-5 justify-content-center">
+         <h1 class="text-center mb-5">Your Address</h1>
+         <div class="col-md-4 card m-2  " style="height: 100px; max-width: 400px;">
+            <div class="field ">Name</div><input type="text" name="name" id="name" value="" required>
+         </div>
+         <div class="col-md-4 card m-2  " style="height: 100px; max-width: 400px;">
+            <div class="field">Phone No </div><input type="number" name="phone" id="phone" value="" required>
+         </div>
+         <div class="col-md-4 card m-2  " style="height: 100px; max-width: 400px;">
+            <div class="field ">landmark</div><input type="text" name="city" id="landmark" value="" required>
+         </div>
+         <div class="col-md-4 card m-2  " style="height: 100px; max-width: 400px;">
+            <div class="field ">City</div><input type="text" name="city" id="city" value="" required>
+         </div>
+         <div class="col-md-4 card m-2  " style="height: 100px; max-width: 400px;">
+            <div class="field">Pin Code</div><input type="number" name="pincode" id="pincode" value="">
+         </div>
+         <div class="col-md-4 card m-2  " style="height: 100px; max-width: 400px;">
+            <div class="field">State</div> <input type="text" name="state" id="state" value="" required>
+         </div>
+         <button type="submit" class="d-block mx-5 bg-primary" style="max-width: 300px; color: white;">Save
+            Address</button>
+      </div>
+   </div>
+
+
+</form>
+
+<script>
+   const name = document.querySelector('#name')
+   const phone = document.querySelector('#phone')
+   const landmark = document.querySelector('#landmark')
+   const city = document.querySelector('#city')
+   const pincode = document.querySelector('#pincode')
+   const state = document.querySelector('#state')
+
+   function add_new_address() {
+      let data = {
+         name: name.value,
+         phone_no: phone.value,
+         landmark: landmark.value,
+         city: city.value,
+         pincode: pincode.value,
+         state: state.value
+      }
+      // console.log(data)
+
+      document.querySelector('#address_box').style.display = 'none';
+
+      axios.post('/new_address', data).then((res) => {
+         console.log(res);
+         console.log("successfully saved");
+      })
+   }
+   document.querySelector('#address_box').addEventListener('submit', e => {
+      e.preventDefault();
+      add_new_address();
+   })
+</script>

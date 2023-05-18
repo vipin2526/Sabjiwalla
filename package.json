@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "nodemon -e ejs,css,js app.js"
   },
   "keywords": [],
   "author": "xmartcoder@gmail.com",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.4.0",
     "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6",
     "ejs": "^3.1.9",

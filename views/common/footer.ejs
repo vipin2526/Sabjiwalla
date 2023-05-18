@@ -1,0 +1,16 @@
+<div class="footer">
+    <li><a href='/'>HOME </a></li>
+    <li><a href='/cart'>CART</a></li>
+    <li><a href='/orders'>ORDERS</a></li>
+    <% if (user && user.name) { %>
+        <li>
+            <a>
+                PROFILE
+            </a>
+        </li>
+        <% } else { %>
+            <li><a href='/login'>LOGIN</a></li>
+            <% } %>
+                </ul>
+
+</div>

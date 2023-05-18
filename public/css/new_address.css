@@ -1,0 +1,22 @@
+#address_box {
+    position: absolute;
+    z-index: 50;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    top:15px;
+    text-align: center;
+    background-color: white;
+    display: none;
+  
+}
+.detail_box{
+    position: relative;
+}
+#close{
+   position: absolute;
+   right: 10px;
+   top: 10px;
+   border-radius: 10px;
+}

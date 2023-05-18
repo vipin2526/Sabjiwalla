@@ -1,7 +1,6 @@
 * {
     margin: 0;
     padding: 0px;
-
 }
 
 body {
@@ -43,6 +42,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+ 
 }
 
 .container {
@@ -56,7 +56,8 @@ body {
     background-color: transparent;
     padding-top: 60px;
     /* opacity: 0.4;  using this is not good use backdrop-filter*/
-    backdrop-filter: blur(20px)
+    backdrop-filter: blur(20px);
+    color: white;
 }
 
 .box {
@@ -108,7 +109,7 @@ input:focus {
 }
 
 a {
-    color: black;
+    color: rgb(255, 255, 255);
 }
 
 
@@ -120,4 +121,8 @@ input::-webkit-inner-spin-button {
 
 #signup>input {
     margin-top: 18px;
+}
+
+input{
+    color:white;
 }
