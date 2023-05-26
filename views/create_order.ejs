@@ -4,11 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap</title>
+    <title>Sabjiwalla</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link rel="stylesheet" href="/public/css/create_order.css">
     <link rel="stylesheet" href="/public/css/new_address.css">
+    <link rel="stylesheet" href="/public/css/myalert.css">
+    <!-- <link rel="stylesheet" href="/public/css/cart.css"> -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
@@ -37,9 +39,9 @@
                         <span class="index">2</span>
                         <span class="name">DELIVERY ADDRESS</span>
                     </div>
-                    <div class="selected"></div>
+                    <div class="selected" id="selected_address"></div>
                 </div>
-                <div class="container explore active">
+                <div class="container explore ">
                     <button class="new_address my-2"
                         onclick="{document.querySelector('#address_box').style.display='block'}">Add New
                         Address</button>
@@ -57,25 +59,59 @@
                             <span class="state">
                                 <%= address.state %>
                             </span>
-                            <div class="phone_no"><span>Name: <%= address.name %> ,</span> Phone No : <%=
-                                    address.phone_no %>
+                            <div class="phone_no">
+                                <span>Name: <%= address.name %> ,</span>
+                                Phone No : <%= address.phone_no %>
                             </div>
                             <button class="edit_btn rounded">edit</button>
-                            <button class="selection_btn ">Dilever Here</button>
+
+                            <button class="selection_btn"
+                                onClick="{create_order.address_obj = JSON.parse('<%= JSON.stringify(address)%>')};update()">
+                                Dilever Here
+                            </button>
                         </div>
                         <% }) %>
 
                 </div>
             </div>
+
             <div class="inner">
                 <div class="container main">
                     <div class="heading ">
                         <span class="index">3</span>
                         <span class="name">ORDER SUMMARY</span>
                     </div>
-                    <div class="selected"></div>
+                    <div class="selected" id="selected_summery"></div>
                 </div>
-                <div class="container explore ">here will all the products</div>
+                <div class="container explore">
+                    <% let i=1;let total=0; let products=[] %>
+                        <% cart.forEach(element=> { %>
+                            <% products.push(element.name) %>
+                                <div class=" main_box fs-4 fw-bold border-secondary border rounded-5 px-5 ">
+                                    <div class="index">
+                                        <%= i++ %>
+                                    </div>
+                                    <div class="c_image m-1"><img src="<%= element.image_url %>" alt="Not Found">
+                                    </div>
+                                    <div>
+                                        <div class="name">
+                                            <%= element.name %>
+                                        </div>
+                                        <div class="price">
+                                            <%= element.price %>
+                                                <% total +=Number(element.price) %>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <% }) %>
+                                    <div class="d-flex justify-content-center">
+                                        <h2 class="p-2 text-center">TOTAL AMOUNT <%= total %> Rs.
+                                                <button class="cnf_btn"
+                                                    onClick="{ create_order.items_name = '<%= products %>';create_order.items=JSON.parse('<%= JSON.stringify(user.cart)%>');update()}">CONTINUE</button>
+                                    </div>
+
+                </div>
             </div>
             <div class="inner">
                 <div class="container main">
@@ -83,34 +119,56 @@
                         <span class="index">4</span>
                         <span class="name">PAYMENT OPTIONS</span>
                     </div>
-                    <div class="selected"></div>
+                    <div class="selected" id="selected_pay_method"></div>
                 </div>
-                <div class="container explore ">dsf</div>
+                <div class="container explore p-4">
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
+                            checked>
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Case On Delevery
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
+                            disabled>
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            UPI
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3"
+                            disabled>
+                        <label class="form-check-label" for="flexRadioDefault3">
+                            Debit Card
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4"
+                            disabled>
+                        <label class="form-check-label" for="flexRadioDefault4">
+                            Credit Card
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault5"
+                            disabled>
+                        <label class="form-check-label" for="flexRadioDefault5">
+                            Internet Banking
+                        </label>
+                    </div>
+                    <button class="cnf_btn"
+                        onClick="{ create_order.paymentmethod='Case on Delevery'; update();submit_order()}">CONTINUE</button>
+                </div>
             </div>
 
         </div>
-        <script>
-            const order_page_elements = document.querySelectorAll('.inner')
-            const explored_elements = document.querySelectorAll('.explore')
-
-            order_page_elements.forEach(e => {
-                e.addEventListener('click', () => {
-                    remove_class(explored_elements, 'active');
-                    let a = e.querySelector('.explore')
-                    a.classList.add('active')
-
-                })
-            })
-
-            function remove_class(elements, classname) {
-                elements.forEach(e => {
-                    e.classList.remove(classname);
-                })
-            }
-        </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
             crossorigin="anonymous"></script>
+        <script src="/public/js/create_order.js"></script>
+        <script src="/public/js/myalert.js"></script>
 </body>
 
 </html>

@@ -74,7 +74,6 @@
 }
 
 .selection_btn {
-    display: block;
     margin-top: 10px;
     height: 40px;
     width: 200px;
@@ -83,4 +82,54 @@
     font-size: larger;
     font-weight: 500;
     display: none;
+}
+
+
+
+
+ /* for summary  */
+.c_image {
+    height: 100px;
+    width: 100px;
+    overflow: hidden;
+}
+
+img{
+    height: 100px;
+    width: 100px;
+}
+
+.main_box {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    max-width: 40rem;
+    margin-right: auto;
+    margin-left: auto; 
+}
+
+body {
+    background: white;
+}
+
+.total {
+    max-height: 350px;
+    position: sticky;
+    top: 100px;
+
+}
+
+.cnf_btn {
+    display: block;
+    margin-top: 10px;
+    height: 40px;
+    width: 200px;
+    background-color: rgb(233, 58, 0);
+    color: white;
+    border: none;
+    font-size: 20px;
+}
+
+.form-check{
+    padding-left: 30px;
 }

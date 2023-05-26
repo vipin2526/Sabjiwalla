@@ -1,6 +1,7 @@
 require('./Connection')
 const User = require('../models/Userschema')
 const Product = require('../models/Productschema')
+const Order = require('../models/Orderschema')
 const routes = require('express').Router();
 const bodyparser = require('body-parser')
 
@@ -22,6 +23,7 @@ const islogin = async (req, res, next) => {
     }
 }
 
+
 routes.get('/', islogin, async (req, res) => {
     try {
         const user = req.param;
@@ -32,7 +34,6 @@ routes.get('/', islogin, async (req, res) => {
     } catch (error) {
         console.log('Error : ', error);
     }
-
 })
 
 routes.get('/login', islogin, (req, res) => {
@@ -47,10 +48,21 @@ routes.get('/addproduct', islogin, (req, res) => {
 routes.get('/orders', islogin, (req, res) => {
     res.render('orders', { user: req.param });
 })
-routes.get('/create_order', islogin, (req, res) => {
-    res.render('create_order', { user: req.param });
+routes.get('/create_order', islogin, async (req, res) => {
+    try {
+        const cart_data = req.param.cart;
+        let cart = [];
+        for (const element of cart_data) {
+            const product = await Product.findOne({ _id: element.product_id });
+            cart.push(product);
+        }
+        res.render('create_order', { user: req.param, cart: cart });
+    } catch (error) {
+        console.log('Error : ', error);
+    }
+
 })
-routes.get('/forget_password',(req,res)=>{
+routes.get('/forget_password', (req, res) => {
     res.render('forget_password');
 })
 /// cart
@@ -161,6 +173,25 @@ routes.post('/new_address', async (req, res) => {
         }
         else
             res.send("User not found");
+    } catch (error) {
+        console.log('Error : ', error);
+    }
+})
+
+
+routes.post('/create_order', islogin, async (req, res) => {
+    try {
+        const order = new Order(req.body);
+        const ordersave = await order.save();
+        if (ordersave) {
+            res.send("Order Successfully Submitted");
+            const user = await User.findOne({ _id: req.cookies['_id'] })
+            if (user) {
+                user.cart=[];
+                user.save();
+            }
+        }
+
     } catch (error) {
         console.log('Error : ', error);
     }
