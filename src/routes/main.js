@@ -203,12 +203,12 @@ routes.post('/create_order', islogin, async (req, res) => {
 
 routes.post('/addproduct', async (req, res) => {
     try {
-        let data = req.body;
-        data.image_url = '/public/images/' + data.image_url + '.avif';
-        const product = new Product(data);
-        console.log(data);
+        // let data = req.body;
+        // data.image_url = '/public/images/' + data.image_url + '.avif';
+        // const product = new Product(data);
+        // console.log(data);
 
-        const productsave = await product.save();
+        // const productsave = await product.save();
         res.redirect('/addproduct')
     } catch (error) {
         console.log('Error : ', error);
