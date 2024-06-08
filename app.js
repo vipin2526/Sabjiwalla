@@ -1,28 +1,29 @@
 const express = require('express');
-const routes = require('./src/routes/main')
-const bodyparser = require('body-parser')
-const cookieParser =require('cookie-parser')
-const path =require('path')
+const routes = require('./src/routes/main');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const path = require('path');
 const app = express();
 
-// to parse the req.body
-app.use(bodyparser.urlencoded({ extended: true }))
-app.use(bodyparser.json())
+// Parse the request body
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(cookieParser());
 
-///////  Template Engin
+// Set the views directory
 app.set('views', path.join(__dirname, 'views'));
 
 // Set the view engine (e.g., EJS)
 app.set('view engine', 'ejs');
 
-//////
+// Routes
+app.use('/', routes);
 
-app.use('', routes);
-app.use('/public', express.static("public"));
+// Serve static files
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
-
-
-app.listen(process.env.PORT | 5000, () => {
-    console.log("running.............");
-})
+// Start the server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
