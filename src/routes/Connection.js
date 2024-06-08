@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 require("dotenv").config();
 
 
-const uri = process.env.DBROOT || "mongodb://127.0.0.1:27017/sabjiwalla";
+const uri = 'mongodb+srv://root:vipinroot@cluster0.oovckw5.mongodb.net/sabjiwaala';
 
 mongoose.connect(uri)
     .then(() => {
